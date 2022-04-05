@@ -1,8 +1,6 @@
-// TodoList
-
 // params.$target - 해당 컴포넌트가 추가될 DOM 요소
 // params.initialState - 해당 컴포넌트의 초기 상태
-function TodoList({ $target, initialState }) {
+export default function TodoList({ $target, initialState }) {
   const $todoList = document.createElement("div"); // todoList 영역 만들기
 
   $target.appendChild($todoList); // target 요소에 붙이기
