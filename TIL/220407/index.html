@@ -1,0 +1,46 @@
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>history API 예제</title>
+  </head>
+  <body>
+    <div class="container"></div>
+    <a class="linkItem" href="/product-list">product-list</a>
+    <a class="linkItem" href="/article-list">article-list</a>
+    <script>
+      // routing 로직
+      function route() {
+        const $container = document.querySelector(".container");
+        const { pathname } = window.location;
+
+        if (pathname === "/") {
+          $container.innerHTML = "<h1>홈</h1>";
+        } else if (pathname === "/product-list") {
+          $container.innerHTML = "<h1>상품 목록</h1>";
+        } else if (pathname === "/article-list") {
+          $container.innerHTML = "<h1>글 목록</h1>";
+        }
+      }
+      route(); // 맨 처음 접속 시에도 route 호출
+
+      // history API pushState
+      window.addEventListener("click", (event) => {
+        // 이벤트 버블링으로 window 까지 올라감
+        if (event.target.className === "linkItem") {
+          event.preventDefault(); // a 태그 동작 없앰
+
+          const { href } = event.target; // a 태그로 이동한 전체 url
+          const path = href.replace(window.location.origin, ""); // origin 뒤 path 추출
+
+          history.pushState(null, null, path); // state, title, url
+          route();
+        }
+      });
+
+      // 이전, 다음 페이지 이동 이벤트 추가
+      window.addEventListener("popstate", (event) => route());
+    </script>
+  </body>
+</html>
