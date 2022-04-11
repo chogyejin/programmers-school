@@ -15,9 +15,16 @@ export default function TodoList({
   };
 
   this.render = () => {
+    const { isLoading, todos } = this.state;
+
+    if (!isLoading && todos.length === 0) {
+      $todo.innerHTML = `투두가 없어요`;
+      return;
+    }
+
     $todo.innerHTML = `
       <ul>
-        ${this.state
+        ${todos
           .map(
             ({ _id, content, isCompleted }) => `
             <li data-id=${_id} class="todo-item">

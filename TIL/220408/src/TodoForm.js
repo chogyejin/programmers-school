@@ -1,3 +1,6 @@
+import { getItem, removeItem, setItem } from "./storage.js";
+
+const TODO_TEMP_SAVE_KEY = "TODO_TEMP_SAVE_KEY";
 export default function TodoForm({ $target, onSubmit }) {
   const $form = document.createElement("form");
   $target.appendChild($form);
@@ -17,7 +20,16 @@ export default function TodoForm({ $target, onSubmit }) {
 
     onSubmit(content);
     $input.value = "";
+    removeItem(TODO_TEMP_SAVE_KEY);
   });
 
   this.render();
+
+  // todo 입력 창에 적은 거 임시 저장
+  const $input = $form.querySelector("input");
+  $input.value = getItem(TODO_TEMP_SAVE_KEY, "");
+
+  $input.addEventListener("keyup", (event) => {
+    setItem(TODO_TEMP_SAVE_KEY, event.target.value);
+  });
 }
