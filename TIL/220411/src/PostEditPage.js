@@ -1,6 +1,7 @@
 import { request } from "./api.js";
 import Editor from "./Editor.js";
-import { getItem, setItem } from "./storage.js";
+import LinkButton from "./LinkButton.js";
+import { getItem, removeItem, setItem } from "./storage.js";
 
 export default function PostEditPage({ $target, initialState }) {
   const $page = document.createElement("div");
@@ -12,7 +13,17 @@ export default function PostEditPage({ $target, initialState }) {
       postLocalSaveKey = `tempKey-${nextState.postId}`;
       this.state = nextState;
 
-      await fetchPost();
+      if (this.state.postId === "new") {
+        const post = getItem(postLocalSaveKey, {
+          title: "",
+          content: "",
+        });
+
+        editor.setState(post);
+        this.render();
+      } else {
+        await fetchPost();
+      }
       return;
     }
 
@@ -37,12 +48,34 @@ export default function PostEditPage({ $target, initialState }) {
       if (timer !== null) {
         clearTimeout(timer);
       }
-      timer = setTimeout(() => {
+      timer = setTimeout(async () => {
         setItem(postLocalSaveKey, {
           ...post,
           tempSaveData: new Date(),
         });
-      }, 1000);
+
+        // new면 API 날리고 현재 url id로 replace
+        const isNew = this.state.postId === "new";
+        if (isNew) {
+          const createdPost = await request(`/posts`, {
+            method: "POST",
+            body: JSON.stringify(post),
+          });
+          history.replaceState(null, null, `/posts/${createdPost.id}`);
+          removeItem(postLocalSaveKey);
+
+          // new에서 작성하다가 /posts/{id} 갔을 때 해당 id로 set (id 무한 생성 막음)
+          this.setState({
+            postId: createdPost.id,
+          });
+        } else {
+          await request(`/posts/${post.id}`, {
+            method: "PUT",
+            body: JSON.stringify(post),
+          });
+          removeItem(postLocalSaveKey);
+        }
+      }, 3000);
     },
   });
 
@@ -78,4 +111,10 @@ export default function PostEditPage({ $target, initialState }) {
       });
     }
   };
+
+  // custom button
+  new LinkButton({
+    $target: $page,
+    initialState: { text: "목록으로", link: "/" },
+  });
 }
