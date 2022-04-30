@@ -14,10 +14,10 @@ export const request = async (url, options) => {
   }
 };
 
-const data = {
-  content: "ㅜㅜㅜㅜㅜㅜㅜㅜ",
-  isCompleted: true,
-};
+// const data = {
+//   content: "ㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊㅊ",
+//   isCompleted: true,
+// };
 
 // const a = () => {
 //   fetch(`${API_END_POINT}`, {
@@ -29,13 +29,3 @@ const data = {
 //   });
 // };
 // a();
-
-// const _id = "626c4c5accbcff0556e9f4f3";
-// fetch(`${API_END_POINT}/${_id}`, {
-//   method: "DELETE",
-// });
-
-// const _id = "626c4cd5ccbcff0556e9f4f7";
-// fetch(`${API_END_POINT}/${_id}/toggle`, {
-//   method: "PUT",
-// });
