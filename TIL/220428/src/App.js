@@ -1,7 +1,9 @@
+import TaskManager from "./components/TaskManager.js";
 import TodoList from "./components/TodoList.js";
 import { request } from "./utils/api.js";
 
 export default function App({ $target }) {
+  const tasks = new TaskManager();
   this.state = { todos: [] };
 
   this.setState = (nextState) => {
@@ -30,18 +32,18 @@ export default function App({ $target }) {
       const nextTodos = [...this.state.todos]; // 현재 todo copy
       const todoIndex = nextTodos.findIndex((todo) => todo._id === todoId); // 현재 todo index 찾고
 
-      nextTodos[todoIndex].isCompleted = true; // 완료여부 false에서 true로
+      nextTodos[todoIndex].isCompleted = false; // 완료여부 false에서 true로
       this.setState({
         ...this.state,
         todos: nextTodos, // 바꾼 todos 배열 낙관적 업데이트
       });
 
-      // 실제 처리
-      const res = await request(`/${todoId}/toggle`, {
-        method: "PUT",
+      // 태스크 큐 적용
+      tasks.addTask(async () => {
+        await request(`/${todoId}/toggle`, {
+          method: "PUT",
+        });
       });
-
-      await fetchTodos();
     },
   });
 
@@ -61,11 +63,11 @@ export default function App({ $target }) {
         todos: nextTodos,
       });
 
-      const res = await request(`/${todoId}/toggle`, {
-        method: "PUT",
+      tasks.addTask(async () => {
+        await request(`/${todoId}/toggle`, {
+          method: "PUT",
+        });
       });
-
-      await fetchTodos();
     },
   });
 
@@ -79,4 +81,9 @@ export default function App({ $target }) {
   };
 
   fetchTodos();
+
+  const $button = document.createElement("button");
+  $button.textContent = "변경 내용 동기화";
+  $target.appendChild($button);
+  $button.addEventListener("click", () => tasks.run()); // 버튼 누르면 백엔드로 요청
 }
