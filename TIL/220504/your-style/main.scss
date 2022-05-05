@@ -1,0 +1,11 @@
+// @import "./variables";
+@use "./variables" as var; // namespace 생성
+@use "./mixins" as mix;
+@forward "./variables" as var-*; // 가져온 모듈 다시 다른 곳으로 포워딩하기
+@forward "./mixins" as mix-*;
+
+.your-style {
+  background-color: var.$primary;
+  color: var.$success;
+  @include mix.square;
+}

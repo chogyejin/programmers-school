@@ -1,0 +1,7 @@
+@use "../your-style/main";
+
+.my-style {
+  position: relative;
+  border: 4px solid main.$var-error; // main에서 @forward 규칙 필요
+  @include main.mix-square(700px);
+}
