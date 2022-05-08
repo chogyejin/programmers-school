@@ -8,23 +8,25 @@
     <script src="https://unpkg.com/vue@next"></script>
   </head>
   <body>
-    <div>
-      <h1 id="app">{{msg}}</h1>
+    <div id="app">
+      <h1>{{msg}}</h1>
+      <!-- 데이터를 첫 출력까지만 보여주고 반응형 X -->
+      <h2 v-once>{{msg}}</h2>
+      <!--문자 그대로-->
+      <h3>{{rawHTML}}</h3>
+      <!--HTML 구조대로-->
+      <div v-html="rawHTML"></div>
+      <!-- 동적 전달인자, active가 data로 취급 안되려면 따옴표로 묶어야함-->
+      <h1 v-bind:[attr]="'active'">Hello</h1>
     </div>
     <script>
       const App = {
         data() {
           return {
             msg: "안녕!!",
+            rawHTML: '<h3 style="color: red;">HTML HTML</h3>',
+            attr: "class",
           };
-        },
-        beforeUpdate() {
-          console.log(this.msg);
-          console.log(document.querySelector("h1").textContent);
-        },
-        updated() {
-          console.log(this.msg);
-          console.log(document.querySelector("h1").textContent);
         },
       };
 

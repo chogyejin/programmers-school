@@ -1,0 +1,52 @@
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const app = {
+        // data 객체는 proxy 인스턴스 간에 데이터 공유, Proxy(app.data,{})
+        // data: {
+        //   count: 0,
+        // },
+
+        // data() 함수는 각 컴포넌트별로 return 다르게 가능, Proxy(app.data(), {})
+        data() {
+          return {
+            count: 0,
+          };
+        },
+      };
+
+      // 인자는 감시 target, handler
+      const proxyA = new Proxy(app.data(), {
+        get(target, key) {
+          // 데이터 조회할 때
+          console.log("getter", target, key);
+          return target[key]; // data 객체에서 count라는 key로 value 조회
+        },
+        set(target, key, value) {
+          // 데이터 할당할 때
+          console.log("setter", target, key, value);
+          target[key] = value; // value * 2 를 할당할 수도 있음
+        },
+      });
+
+      const proxyB = new Proxy(app.data(), {
+        get(target, key) {
+          // 데이터 조회할 때
+          console.log("getter", target, key);
+          return target[key]; // data 객체에서 count라는 key로 value 조회
+        },
+        set(target, key, value) {
+          // 데이터 할당할 때
+          console.log("setter", target, key, value);
+          target[key] = value; // value * 2 를 할당할 수도 있음
+        },
+      });
+    </script>
+  </body>
+</html>
