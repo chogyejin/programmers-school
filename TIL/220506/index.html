@@ -8,34 +8,43 @@
   </head>
   <body>
     <div id="app">
-      <ul>
-        <li v-for="todo in upperTodos">{{todo.title}}</li>
-      </ul>
+      <h1>{{fullName}}</h1>
+      <h1>{{firstName}}</h1>
+      <h1>{{lastName}}</h1>
     </div>
 
     <script>
       const App = {
         data() {
           return {
-            todos: [],
+            firstName: "cho",
+            lastName: "gyejin",
           };
         },
         computed: {
-          upperTodos() {
-            return this.todos.map((todo) => ({
-              ...todo,
-              title: todo.title.toUpperCase(),
-            }));
+          // fullName() {
+          //   return `${this.firstName} ${this.lastName}`;
+          // },
+          fullName: {
+            get() {
+              return `${this.firstName} ${this.lastName}`;
+            },
+            set(newValue) {
+              console.log(newValue); // 띄어쓰기 기준으로 first, last
+              const names = newValue.split(" ");
+              this.firstName = names[0];
+              this.lastName = names[1];
+            },
           },
         },
-        // mount 전, html 연결된건 mounted
-        created() {
-          fetch("https://jsonplaceholder.typicode.com/todos")
-            .then((res) => res.json())
-            .then((res) => {
-              console.log(res);
-              this.todos = res;
-            });
+        // 반응형 data 감시
+        watch: {
+          firstName(newValue, oldValue) {
+            console.log("watch", newValue, oldValue);
+          },
+          fullName() {
+            console.log("watch", this.fullName); // firstName 변경에도 반응
+          },
         },
       };
 
