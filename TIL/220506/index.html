@@ -7,51 +7,48 @@
     <script src="https://unpkg.com/vue@next"></script>
   </head>
   <body>
+    <style>
+      .title {
+        color: blue;
+        font-size: 50px;
+      }
+      .active {
+        color: red;
+      }
+      .title--small {
+        font-size: 30px;
+      }
+      .color--orange {
+        /* .active보다 아래 적혀 우선순위 높음 */
+        color: orange;
+      }
+    </style>
     <div id="app">
-      <h1>{{user.age}}</h1>
-      <ul>
-        <li v-for="fruit in fruits">{{fruit.name}}</li>
-      </ul>
-      <button @click="upper">클릭</button>
+      <button @click="toggle">토글</button>
+      <h1 :class="classObject" class="title">{{msg}}</h1>
     </div>
 
     <script>
       const App = {
         data() {
           return {
-            user: {
-              name: "chogyejin",
-              age: "20",
-            },
-            fruits: [
-              { id: 1, name: "aaa" },
-              { id: 2, name: "bbbb" },
-              { id: 3, name: "ccccc" },
-            ],
+            msg: "안녕",
+            active: false,
+            small: false,
           };
         },
-        computed: {},
-        // 반응형 data 감시
-        watch: {
-          user: {
-            handler(newValue, oldValue) {
-              console.log(newValue, oldValue);
-            },
-            deep: true,
-          },
-          fruits: {
-            handler() {
-              console.log(this.fruits);
-            },
-            deep: true,
-            immediate: true,
+        computed: {
+          classObject() {
+            return {
+              active: this.active,
+              "title--small color--orange": this.small,
+            };
           },
         },
         methods: {
-          upper() {
-            this.fruits.map((fruit) => {
-              fruit.name = fruit.name.toUpperCase();
-            });
+          toggle() {
+            this.active = !this.active;
+            this.small = !this.small;
           },
         },
       };
