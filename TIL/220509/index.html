@@ -20,12 +20,35 @@
         <input type="checkbox" v-model="checked" value="eee" />
         <input type="checkbox" v-model="checked" value="fff" />
       </div>
+      <select v-model="selected">
+        <option value="">하나를 선택하세요</option>
+        <!-- <option value="apple">사과</option>
+        <option value="banana">바나나</option>
+        <option value="cherry">체리</option> -->
+        <option v-for="fruit in fruits" :key="fruit.value" :value="fruit.value">
+          {{fruit.text}}
+        </option>
+      </select>
+      <div>
+        <input type="text" v-model.lazy.number.trim="msg" />
+        <h1>{{msg}}</h1>
+      </div>
     </div>
 
     <script>
       const App = {
         data() {
-          return { picked: "", checked: [] };
+          return {
+            picked: "",
+            checked: [],
+            selected: "", // value 넣어두면 default로 시작
+            fruits: [
+              { text: "사과", value: "apple" },
+              { text: "바나나", value: "banana" },
+              { text: "체리", value: "cherry" },
+            ],
+            msg: "안녕",
+          };
         },
         watch: {
           picked(newValue) {
@@ -33,6 +56,12 @@
           },
           checked(newValue) {
             console.log(newValue);
+          },
+          selected(newValue) {
+            console.log(newValue);
+          },
+          msg(newValue) {
+            console.log(newValue); // 공백 문자가 제거된 msg는 기존의 msg와 같기 때문에 반응 log 안 찍힘
           },
         },
       };
