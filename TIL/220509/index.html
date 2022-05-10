@@ -8,60 +8,31 @@
   </head>
   <body>
     <div id="app">
-      <form @submit="addNewTodo">
-        <label for="new-todo">todo를 추가하세요</label>
-        <input type="text" id="new-todo" v-model="newTodoText" />
-        <button>추가</button>
-      </form>
-      <ul>
-        <todo-item
-          v-for="todo in todos"
-          :key="todo.id"
-          :todo="todo"
-          @remove="removeTodo"
-        />
-      </ul>
+      <div>
+        <span>라디오 버튼</span>
+        <input type="radio" v-model="picked" value="aa" />
+        <input type="radio" v-model="picked" value="bb" />
+        <input type="radio" v-model="picked" value="cc" />
+      </div>
+      <div>
+        <span>체크박스</span>
+        <input type="checkbox" v-model="checked" value="ddd" />
+        <input type="checkbox" v-model="checked" value="eee" />
+        <input type="checkbox" v-model="checked" value="fff" />
+      </div>
     </div>
 
     <script>
-      const generateId = () => {
-        return `${Date.now()}${Math.random()}`;
-      };
-
-      const TodoItem = {
-        template: `
-        <li>
-          {{ todo.title }}
-          <button @click="$emit('remove', todo.id)">삭제</button>
-        </li>
-        `,
-        props: ["todo"], // component 밖에서 todo라는 데이터 받아올 거다
-      };
-
       const App = {
-        components: {
-          TodoItem,
-        },
         data() {
-          return {
-            newTodoText: "",
-            todos: [],
-          };
+          return { picked: "", checked: [] };
         },
-        methods: {
-          addNewTodo(event) {
-            event.preventDefault();
-            this.todos.push({
-              id: generateId(),
-              title: this.newTodoText,
-            });
-            this.newTodoText = "";
-            console.log(this.todos);
+        watch: {
+          picked(newValue) {
+            console.log(newValue);
           },
-          removeTodo(todoId) {
-            this.todos = this.todos.filter((todo) => {
-              return todo.id !== todoId;
-            });
+          checked(newValue) {
+            console.log(newValue);
           },
         },
       };
