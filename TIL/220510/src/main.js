@@ -1,3 +1,4 @@
-import bar from "./bar.js";
+import { createApp } from "vue";
+import App from "./App.vue";
 
-bar();
+createApp(App).mount("#app");
