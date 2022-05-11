@@ -1,0 +1,55 @@
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <upper-name
+        v-for="fruit in fruits"
+        :key="fruit.id"
+        :name="fruit.name"
+        @my-upper="toUpper(fruit, $event)"
+      ></upper-name>
+    </div>
+
+    <script>
+      // 최상위 컴포넌트
+      const App = {
+        data() {
+          return {
+            fruits: [
+              { id: 1, name: "apple" },
+              { id: 2, name: "banana" },
+              { id: 3, name: "cherry" },
+            ],
+          };
+        },
+        methods: {
+          toUpper(fruit, upperName) {
+            console.log(fruit, upperName); // $event 객체로 보낸 upperName === upper-name 컴포넌트의 this.name.toUpperCase()
+            fruit.name = upperName;
+          },
+        },
+      };
+      const app = Vue.createApp(App);
+
+      // 전역 컴포넌트
+      app.component("upper-name", {
+        template: `<div @click="upper">{{ name }}</div>`, // 받은 prop 출력, 클릭시 methods의 upper 핸들러 실행
+        props: ["name"], // name이라는 속성을 통해 props 받음
+        methods: {
+          upper() {
+            // this.name = this.name.toUpperCase(); // 외부 데이터인 name을 현재 컴포넌트에가 수정할 권한이 없음
+            this.$emit("my-upper", this.name.toUpperCase()); // my-upper라는 커스텀 이벤트 생성, 연결된 메서드에 두 번째 인자를 데이터로 전달
+          },
+        },
+      });
+
+      const vm = app.mount("#app");
+    </script>
+  </body>
+</html>
