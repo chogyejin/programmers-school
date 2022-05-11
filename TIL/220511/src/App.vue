@@ -1,11 +1,5 @@
 <template>
-  <div>
-    <Btn />
-    <button @click="reverse">뒤집기</button>
-    <!-- message라는 이름으로 props 전달-->
-    <!-- <Hello message="안녕 뷰!" /> -->
-    <Hello :message="msg" :name="123" />
-  </div>
+  <Hello :="post" />
 </template>
 
 <script>
@@ -18,13 +12,12 @@ export default {
   },
   data() {
     return {
-      msg: "안녕 뷰!!",
+      post: {
+        id: 1,
+        title: "안녀여영",
+        email: "chogyein@chogyein.com",
+      },
     };
-  },
-  methods: {
-    reverse() {
-      this.msg = this.msg.split("").reverse().join("");
-    },
   },
 };
 </script>
