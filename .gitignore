@@ -1,0 +1,8 @@
+index.js
+220318.md
+node_modules/
+dist
+.idea/
+.vscode/
+.Ds_store/
+.parcel-cache/
