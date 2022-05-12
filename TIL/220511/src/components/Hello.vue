@@ -1,19 +1,16 @@
 <template>
-  <div>
-    <h1>{{ id }} // {{ title }} // {{ email }}</h1>
-  </div>
+  <h1
+    :class="$attrs.class"
+    :style="$attrs.style">
+    Hellooooo
+  </h1>
+  <h2 @click="$attrs.onClick">
+    what
+  </h2>
 </template>
 
 <script>
 export default {
-  props: {
-    id: Number,
-    title: {
-      type: String,
-      required: true,
-    },
-    email: { type: String, default: "aa@aa.com" },
-  },
   data() {
     return {};
   },

@@ -1,5 +1,8 @@
 <template>
-  <Hello :="post" />
+  <div>
+    <h1>{{ msg }}</h1>
+    <Hello class="hello" style="font-size: 50px" @click="msg += '!'" />
+  </div>
 </template>
 
 <script>
@@ -12,11 +15,7 @@ export default {
   },
   data() {
     return {
-      post: {
-        id: 1,
-        title: "안녀여영",
-        email: "chogyein@chogyein.com",
-      },
+      msg: "이잉",
     };
   },
 };
