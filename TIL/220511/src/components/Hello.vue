@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <h1>Hello 컴포넌트</h1>
-  </div>
+  <h1 ref="hello">Hello 컴포넌트</h1>
+  <h1 ref="world">world</h1>
 </template>
 
 <script>
 export default {
-  created() {
-    console.log("hello 만들어짐");
-  },
-  unmounted() {
-    console.log("hello 없어짐");
+  mounted() {
+    const h1Element = this.$refs.hello;
+    console.log(h1Element);
   },
 };
 </script>
