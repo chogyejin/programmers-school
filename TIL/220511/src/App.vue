@@ -1,18 +1,10 @@
 <template>
   <div>
-    <Hello>
-      <template #default="{ num }">
-        {{ num }}
-      </template>
-      <template #abc="{ myName }">
-        <h1>ABC {{ myName }}</h1>
-      </template>
-      <template #xyz>
-        <h1>XYZ</h1>
-      </template>
-    </Hello>
-    <Btn>클릭 하세요!</Btn>
-    <Btn />
+    <button @click="currentComponent = 'World'">World 컴포넌트로 바꾸기</button>
+    <button @click="currentComponent = 'Hello'">Hello 컴포넌트로 바꾸기</button>
+    <keep-alive>
+      <component :is="currentComponent" />
+    </keep-alive>
   </div>
 </template>
 
@@ -23,6 +15,11 @@ export default {
   // App 컴포넌트에 지역 컴포넌트 등록
   components: {
     Hello,
+  },
+  data() {
+    return {
+      currentComponent: "Hello",
+    };
   },
 };
 </script>
