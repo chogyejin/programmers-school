@@ -7,13 +7,6 @@
   "rules": {
     "semi": ["error", "always"],
     "quotes": ["error", "double"],
-    "vue/html-closing-bracket-newline": [
-      "error",
-      {
-        "singleline": "never",
-        "multiline": "never"
-      }
-    ],
     "vue/html-self-closing": [
       "error",
       {
