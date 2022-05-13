@@ -1,6 +1,6 @@
 <template>
   <div style="transform: scale(1)">
-    <Modal width="300px">
+    <Modal v-model="isShow" width="300px">
       <template #activator>
         <button>모달 켜기</button>
       </template>
@@ -17,7 +17,9 @@ import Hello from "~/components/Hello";
 export default {
   components: { Hello },
   data() {
-    return {};
+    return {
+      isShow: false,
+    };
   },
   methods: {},
 };
