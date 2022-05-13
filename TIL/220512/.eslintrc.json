@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true, // window 객체 등
+    "node": true // module 객체 등
+  },
+  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended"],
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "double"],
+    "vue/html-closing-bracket-newline": [
+      "error",
+      {
+        "singleline": "never",
+        "multiline": "never"
+      }
+    ],
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": {
+          "void": "always", // 빈 태그들 / 알아서 붙게
+          "normal": "never", // 비워져 있어도 / 안 붙게
+          "component": "always"
+        },
+        "svg": "always",
+        "math": "always"
+      }
+    ],
+    "vue/multi-word-component-names": [
+      "error",
+      {
+        "ignores": ["Hello"]
+      }
+    ]
+  }
+}
