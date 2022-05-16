@@ -1,38 +1,32 @@
-import { reactive } from "vue";
+import { createStore } from "vuex";
+import message from "./message";
+import count from "./count";
 
-export const state = reactive({
-  msg: "Hello 뷰우우!",
-  count: 1,
+export default createStore({
+  // 데이터는 함수로 만들어야함
+  state() {
+    return {
+      msg: "안녕 뷰우우!!",
+      count: 1,
+    };
+  },
+  // state에 대한 계산된 결과 생성 후 return
+  getters: {},
+  // 데이터 수정(동기)
+  mutations: {},
+  // 그 외 모든 로직(비동기)
+  actions: {
+    // context 객체는 state, getters, commit(mutations), dispatch(actions)로 다른 객체에 접근
+    // async fetchTodo(context) {
+    //   const todo = await fetch(
+    //     "https://jsonplaceholder.typicode.com/todos/1"
+    //   ).then((res) => res.json());
+    //   console.log(todo);
+    //   context.commit("updateMsg", todo.title); // 매개변수 context 구조분해할당 가능
+    // },
+  },
+  modules: {
+    message,
+    count,
+  },
 });
-
-// 계산된 데이터 만들어서 return
-export const getters = {
-  reversedMsg() {
-    return state.msg.split("").reverse().join("");
-  },
-};
-
-// 데이터 수정
-export const mutations = {
-  increaseCount() {
-    state.count += 1; // proxy 인스턴스를 바꿔야 반응형이 되는데, state는 단순한 객체기 때문에 reactive로 state 감싼다
-  },
-  decreaseCount() {
-    state.count -= 1;
-  },
-  updateMsg(newMsg) {
-    state.msg = newMsg;
-  },
-};
-
-// 그 외
-export const actions = {
-  async fetchTodo() {
-    const todo = await fetch(
-      "https://jsonplaceholder.typicode.com/todos/1"
-    ).then((res) => res.json());
-    console.log(todo);
-    // state.msg = todo.title; // 데이터 수정은 mutaions에서만 관리해야 추적이 용이하다
-    mutations.updateMsg(todo.title);
-  },
-};
