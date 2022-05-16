@@ -1,21 +1,16 @@
 <template>
   <div>
-    <h1 @click="msg += '!!'">{{ msg }} 난 App임</h1>
-    <Parent />
+    <Hello />
+    <World />
   </div>
 </template>
 
 <script>
-import Parent from "~/components/Parent";
-import { computed } from "vue";
+import Hello from "~/components/Hello";
+import World from "~/components/World";
 
 export default {
-  components: { Parent },
-  provide() {
-    return {
-      msg: computed(() => this.msg),
-    };
-  },
+  components: { Hello, World },
   data() {
     return {
       msg: "안녕",
