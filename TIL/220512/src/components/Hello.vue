@@ -11,27 +11,19 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+
 export default {
   computed: {
-    msg() {
-      // return this.$store.state.msg; // main.js에서 등록된 store
-      return this.$store.state.message.msg; // message 모듈의 msg state
-    },
-    count() {
-      // return this.$store.state.count; // main.js에서 등록된 store
-      return this.$store.state.count.count; // count module
-    },
-    reversedMsg() {
-      return this.$store.getters["message/reversedMsg"];
-    },
+    // 첫 인자 모듈에서 배열 안의 state 가져오겠다.
+    // ...mapState(["전역state"]), // 전역의 state
+    ...mapState("count", ["count"]),
+    ...mapState("message", ["msg"]),
+    ...mapGetters("message", ["reversedMsg"]),
   },
   methods: {
-    increaseCount() {
-      this.$store.commit("count/increaseCount");
-    },
-    fetchTodo() {
-      this.$store.dispatch("message/fetchTodo");
-    },
+    ...mapMutations("count", ["increaseCount"]),
+    ...mapActions("message", ["fetchTodo"]),
   },
 };
 </script>
