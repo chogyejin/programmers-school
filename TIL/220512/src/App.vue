@@ -1,26 +1,25 @@
 <template>
-  <div style="transform: scale(1)">
-    <Modal v-model="isShow" width="300px">
-      <template #activator>
-        <button>모달 켜기</button>
-      </template>
-      <h3>App.vue</h3>
-    </Modal>
-    <Hello />
+  <div>
+    <h1 @click="msg += '!!'">{{ msg }} 난 App임</h1>
+    <Parent />
   </div>
 </template>
 
 <script>
-// import Modal from "./components/Modal.vue"; // 지역으로 등록할 때
-import Hello from "~/components/Hello";
+import Parent from "~/components/Parent";
+import { computed } from "vue";
 
 export default {
-  components: { Hello },
-  data() {
+  components: { Parent },
+  provide() {
     return {
-      isShow: false,
+      msg: computed(() => this.msg),
     };
   },
-  methods: {},
+  data() {
+    return {
+      msg: "안녕",
+    };
+  },
 };
 </script>
