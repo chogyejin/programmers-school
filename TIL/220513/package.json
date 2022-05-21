@@ -5,17 +5,30 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development"
+    "dev": "webpack-dev-server --mode development",
+    "babel": "babel main.js --out-dir dist"
   },
   "keywords": [],
   "author": "",
+  "browerslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "ie >= 11"
+  ],
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
+    "@babel/plugin-transform-runtime": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "@babel/runtime-corejs3": "^7.18.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.15.0",
     "eslint-plugin-vue": "^8.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "postcss-loader": "^7.0.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "vue-loader": "^17.0.0",
@@ -25,6 +38,7 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
+    "babel-loader": "^8.2.5",
     "vue": "^3.2.33",
     "vue-router": "^4.0.13"
   }

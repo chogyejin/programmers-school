@@ -23,8 +23,18 @@ module.exports = {
         use: "vue-loader",
       },
       {
+        test: /\.js$/, // .js로 끝나는 파일들
+        exclude: /node_modules/, // node_modules 폴더는 제외
+        use: "babel-loader",
+      },
+      {
         test: /\.s?css$/, // scss, css 다 찾도록
-        use: ["vue-style-loader", "css-loader", "sass-loader"], // 먼저 평가되어야 하는 아이템을 나중에 적기
+        use: [
+          "vue-style-loader",
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ], // 먼저 평가되어야 하는 아이템을 나중에 적기
       },
     ],
   },
