@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 
 const BreadcrumbItemContainer = styled.div`
   display: inline-flex;
@@ -10,7 +11,7 @@ const Anchor = styled.a`
   text-decoration: none;
 `;
 
-const BreadcrumbItem = ({ children, href, active, __TYPE, ...props }) => {
+const BreadcrumbItem = ({ children, href, active, ...props }) => {
   return (
     <BreadcrumbItemContainer {...props}>
       <Anchor href={href}>
@@ -26,7 +27,7 @@ BreadcrumbItem.defaultProps = {
 };
 
 BreadcrumbItem.propTypes = {
-  __TYPE: "BreadcrumbItem",
+  __TYPE: PropTypes.oneOf(["BreadcrumbItem"]),
 };
 
 export default BreadcrumbItem;

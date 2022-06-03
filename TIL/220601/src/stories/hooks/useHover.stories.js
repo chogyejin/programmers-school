@@ -13,6 +13,7 @@ const Box = styled.div`
 
 export const Default = () => {
   const [ref, hover] = useHover();
+
   return (
     <div>
       <Box ref={ref}>Box</Box>

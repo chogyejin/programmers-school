@@ -50,10 +50,8 @@ const Tab = ({ children, active, ...props }) => {
     return items.find((ele) => currentActive === ele.props.index);
   }, [currentActive, items]);
 
-  console.log(items);
-  console.log(activeItem);
   return (
-    <div>
+    <div {...props}>
       <TabItemContainer>{items}</TabItemContainer>
       <div>{activeItem.props.children}</div>
     </div>
