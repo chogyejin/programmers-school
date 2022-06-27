@@ -13,11 +13,14 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "@types/redux-logger": "^3.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
@@ -67,9 +70,11 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.5.9",
     "@storybook/testing-library": "^0.0.13",
+    "@types/redux-persist": "^4.3.1",
     "@types/uuid": "^8.3.4",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
+    "redux-devtools-extension": "^2.13.9",
     "webpack": "^5.73.0"
   }
 }
