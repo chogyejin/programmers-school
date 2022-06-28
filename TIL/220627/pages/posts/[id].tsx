@@ -20,7 +20,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
   try {
     const { data: post } = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
+      // `https://jsonplaceholder.typicode.com/posts/${postId}`
+      `http://localhost:3000/api/posts/${postId}`
     );
 
     return {
