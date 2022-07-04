@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .linecap-demo {
+        stroke: darkmagenta;
+        stroke-width: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="500" height="500">
+      <!-- <circle cx="120" cy="50" r="20" fill="darkmagenta" /> -->
+
+      <!-- <circle cx="100" cy="50" r="40" fill="rgba(0,0,255,0.50" />
+      <circle cx="50" cy="50" r="40" fill="rgb(0,0,255)" opacity="0.5" /> -->
+
+      <text x="0" y="20" font-weight="bold">Linecaps</text>
+      <text x="0" y="50" font-weight="bold">Butt</text>
+      <line
+        x1="60"
+        y1="45"
+        x2="200"
+        y2="45"
+        class="linecap-demo"
+        stroke-linecap="butt"
+      />
+      <!-- linecap이 butt가 아니면 line 양 옆으로 삐져나옴 -->
+      <text x="0" y="70" font-weight="bold">Round</text>
+      <line
+        x1="60"
+        y1="65"
+        x2="200"
+        y2="65"
+        class="linecap-demo"
+        stroke-linecap="round"
+      />
+      <text x="0" y="90" font-weight="bold">Square</text>
+      <line
+        x1="60"
+        y1="85"
+        x2="200"
+        y2="85"
+        class="linecap-demo"
+        stroke-linecap="square"
+      />
+    </svg>
+  </body>
+</html>
