@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <div class="header">
+      <p>Circle</p>
+    </div>
+
+    <svg width="500px" height="40px">
+      <circle cx="50" cy="20" r="20" />
+    </svg>
+
+    <div class="footer">
+      <p>It`s Circle</p>
+    </div>
+
+    <script>
+      // select
+      // console.log(d3.select("p").text()); // Circle
+      // console.log(d3.select(".footer").select("p").text()); // It`s Circle
+
+      // 속성 변경
+      // const myCircle = d3.select("circle");
+      // myCircle.attr("fill", "red");
+      // myCircle.attr("r", "5");
+
+      // 스타일 변경
+      // d3.select("p").style("font-size", "100px");
+
+      // append
+      // d3.select(".header")
+      //   .append("p")
+      //   .text("(hello)")
+      //   .style("font-style", "italic")
+      //   .style("color", "gray");
+
+      // selectAll
+      // d3.selectAll("div").remove();
+    </script>
+  </body>
+</html>
