@@ -9,6 +9,44 @@
   <body>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
+      const data = [
+        {
+          name: "극한직업",
+          value: 16264806,
+        },
+        {
+          name: "어벤져스: 엔드게임",
+          value: 13934592,
+        },
+        {
+          name: "겨울왕국 2",
+          value: 13369070,
+        },
+        {
+          name: "알라딘",
+          value: 12552283,
+        },
+        {
+          name: "기생충",
+          value: 10085275,
+        },
+        {
+          name: "엑시트",
+          value: 9426011,
+        },
+        {
+          name: "스파이더맨: 파 프롬 홈",
+          value: 8021145,
+        },
+      ];
+
+      const nameList = data.map((d) => d.name);
+      const valueList = data.map((d) => d.value);
+      const width = 400;
+      const scaleFactor = width / d3.max(valueList);
+      const scaleText = `scale(${scaleFactor}, 1)`;
+      const translateText = `translate(150, 30)`;
+
       const body = d3.select("body");
 
       body.append("h2").text("2019년 TOP7 영화");
@@ -21,123 +59,61 @@
       // 막대
       const barGroup = svg
         .append("g")
-        .attr("transform", "translate(150, 30) scale(0.000024592977, 1)");
+        .attr("transform", `${translateText} ${scaleText}`);
 
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "0")
-        .attr("height", "20")
-        .attr("width", "16264806");
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "25")
-        .attr("height", "20")
-        .attr("width", "13934592");
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "50")
-        .attr("height", "20")
-        .attr("width", "13369070");
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "75")
-        .attr("height", "20")
-        .attr("width", "12552283");
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "100")
-        .attr("height", "20")
-        .attr("width", "10085275");
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "125")
-        .attr("height", "20")
-        .attr("width", "9426011");
-      barGroup
-        .append("rect")
-        .attr("x", "0")
-        .attr("y", "150")
-        .attr("height", "20")
-        .attr("width", "8021145");
+      const barHeight = 20,
+        barGap = 5,
+        barSpacing = barHeight + barGap;
+
+      valueList.forEach((value, index) => {
+        barGroup
+          .append("rect")
+          .attr("x", "0")
+          .attr("y", barSpacing * index)
+          .attr("height", barHeight)
+          .attr("width", value);
+      });
 
       // 영화 제목
       const barLable = svg.append("g");
 
-      barLable.append("text").attr("x", "0").attr("y", "45").text("극한직업");
-      barLable
-        .append("text")
-        .attr("x", "0")
-        .attr("y", "70")
-        .text("어벤져스: 엔드게임");
-      barLable.append("text").attr("x", "0").attr("y", "95").text("겨울왕국2");
-      barLable.append("text").attr("x", "0").attr("y", "120").text("알라딘");
-      barLable.append("text").attr("x", "0").attr("y", "145").text("기생충");
-      barLable.append("text").attr("x", "0").attr("y", "170").text("엑시트");
-      barLable
-        .append("text")
-        .attr("x", "0")
-        .attr("y", "195")
-        .text("스파이더맨: 파 프롬 홈");
+      nameList.forEach((name, index) => {
+        barLable
+          .append("text")
+          .attr("x", "0")
+          .attr("y", barHeight * (index + 2) + barGap * (index + 1))
+          .text(name);
+      });
 
-      // 포인트 축
+      // 포인트 축, 포인트 설명
+      const tickHeight = -10;
+      const tickGap = -5; // 축 설명 -15에 쓰일 값
+      const axisData = [0, 5601253, 11202506, 16803759];
+
       const xAxis = svg
         .append("g")
-        .attr("transform", "translate(150, 30)")
+        .attr("transform", `${translateText}`)
         .attr("stroke", "black");
 
-      xAxis
-        .append("line")
-        .attr("x1", "0")
-        .attr("y1", "0")
-        .attr("x2", "0")
-        .attr("y2", "-10");
-      xAxis
-        .append("line")
-        .attr("x1", "135.25")
-        .attr("y1", "0")
-        .attr("x2", "135.25")
-        .attr("y2", "-10");
-      xAxis
-        .append("line")
-        .attr("x1", "270.51")
-        .attr("y1", "0")
-        .attr("x2", "270.51")
-        .attr("y2", "-10");
-      xAxis
-        .append("line")
-        .attr("x1", "405.77")
-        .attr("y1", "0")
-        .attr("x2", "405.77")
-        .attr("y2", "-10");
-
-      // 포인트 축 설명
       const xScale = svg
         .append("g")
-        .attr("transform", "translate(150, 30)")
+        .attr("transform", `${translateText}`)
         .attr("text-anchor", "middle");
 
-      xScale.append("text").attr("x", "0").attr("y", "-15").text("0");
-      xScale
-        .append("text")
-        .attr("x", "135.25")
-        .attr("y", "-15")
-        .text("550만명");
-      xScale
-        .append("text")
-        .attr("x", "270.51")
-        .attr("y", "-15")
-        .text("1100만명");
-      xScale
-        .append("text")
-        .attr("x", "405.77")
-        .attr("y", "-15")
-        .text("1650만명");
+      axisData.forEach((data, index) => {
+        xAxis
+          .append("line")
+          .attr("x1", data * scaleFactor)
+          .attr("y1", "0")
+          .attr("x2", data * scaleFactor)
+          .attr("y2", tickHeight);
+
+        xScale
+          .append("text")
+          .attr("x", data * scaleFactor)
+          .attr("y", tickGap + tickHeight)
+          .text(`${!!data ? Math.floor(data / 10000) : data}만명`);
+      });
     </script>
   </body>
 </html>
